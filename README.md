@@ -1,8 +1,7 @@
-# React + Vite
+# Tic, Tac, Toe con React
+También conocido como Ta te ti, para realizar este juego usamos useState. También se puso en práctica la reorganización del código en componentes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Autora 😎:
+- María Lourdes García
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+###### Realizado a partir del siguiente tutorial: [Crea un juego](https://www.youtube.com/watch?v=qkzcjwnueLA&t=412s).
