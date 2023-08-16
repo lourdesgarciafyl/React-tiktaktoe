@@ -1,11 +1,14 @@
-import { useState } from "react";
 import "./App.css";
+
+import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
+
 import Square from "./components/Square";
 import { TURNS, WINNER_COMBOS } from "./constants";
 import { checkWinner, checkEndGame } from "./logic/board";
 import WinnerModal from "./components/WinnerModal";
 import Board from "./components/Board";
+import { saveGameToStorage, resetGameStorage } from "./logic/storage";
 import Turns from "./components/Turns";
 
 function App() {
@@ -21,6 +24,13 @@ function App() {
 
   const [winner, setWinner] = useState(null); // null para no hay ganador, false si hay empate
 
+  useEffect(()=> {
+    saveGameToStorage({
+      board: board,
+      turn: turn
+     })
+  }, [turn, board])
+
   const updateBoard = (index) => {
     // no actualizar la posicicon si ya tiene algo
     if (board[index] || winner) return;
@@ -31,9 +41,6 @@ function App() {
     // cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
-     // guardo aqui la partida
-     window.localStorage.setItem("board", JSON.stringify(newBoard))
-     window.localStorage.setItem("turn", JSON.stringify(newTurn))
     // revisar si hay un ganador
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
@@ -48,8 +55,7 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
-    window.localStorage.removeItem("board");
-    window.localStorage.removeItem("turn");
+    resetGameStorage()
   };
 
   return (
