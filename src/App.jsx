@@ -9,7 +9,8 @@ import { checkWinner, checkEndGame } from "./logic/board";
 import WinnerModal from "./components/WinnerModal";
 import Board from "./components/Board";
 import { saveGameToStorage, resetGameStorage } from "./logic/storage";
-import Turns from "./components/Turns";
+
+
 
 function App() {
   const [board, setBoard] = useState(() => {
@@ -61,14 +62,11 @@ function App() {
   return (
     <>
       <main className="board">
-        <h1 className="mb-2">Tik Tak Toe</h1>
         <Board board={board} updateBoard={updateBoard}></Board>
-
-        <section className="turn">
+       <section className="turn">
           <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
           <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
-        </section>
-
+        </section> 
         <WinnerModal winner={winner} resetGame={resetGame}></WinnerModal>
       </main>
     </>
