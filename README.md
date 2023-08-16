@@ -2,7 +2,7 @@
 También conocido como Ta te ti, para realizar este juego usamos useState. También se puso en práctica la reorganización del código en componentes.
 
 ## El resultado:
-Para ver el proyecto subido a Netlify, [hacé click aqui!](https://mousefollowerreact.netlify.app/)
+Para ver el proyecto subido a Netlify, [hacé click aqui!](https://tiktaktoereact.netlify.app/)
 
 ## Autora 😎:
 - María Lourdes García
