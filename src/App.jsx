@@ -1,12 +1,16 @@
-import { useState } from "react";
 import "./App.css";
+
+import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
+
 import Square from "./components/Square";
 import { TURNS, WINNER_COMBOS } from "./constants";
 import { checkWinner, checkEndGame } from "./logic/board";
 import WinnerModal from "./components/WinnerModal";
 import Board from "./components/Board";
-import Turns from "./components/Turns";
+import { saveGameToStorage, resetGameStorage } from "./logic/storage";
+
+
 
 function App() {
   const [board, setBoard] = useState(() => {
@@ -21,6 +25,13 @@ function App() {
 
   const [winner, setWinner] = useState(null); // null para no hay ganador, false si hay empate
 
+  useEffect(()=> {
+    saveGameToStorage({
+      board: board,
+      turn: turn
+     })
+  }, [turn, board])
+
   const updateBoard = (index) => {
     // no actualizar la posicicon si ya tiene algo
     if (board[index] || winner) return;
@@ -31,9 +42,6 @@ function App() {
     // cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
-     // guardo aqui la partida
-     window.localStorage.setItem("board", JSON.stringify(newBoard))
-     window.localStorage.setItem("turn", JSON.stringify(newTurn))
     // revisar si hay un ganador
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
@@ -48,21 +56,17 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
-    window.localStorage.removeItem("board");
-    window.localStorage.removeItem("turn");
+    resetGameStorage()
   };
 
   return (
     <>
       <main className="board">
-        <h1 className="mb-2">Tik Tak Toe</h1>
         <Board board={board} updateBoard={updateBoard}></Board>
-
-        <section className="turn">
+       <section className="turn">
           <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
           <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
-        </section>
-
+        </section> 
         <WinnerModal winner={winner} resetGame={resetGame}></WinnerModal>
       </main>
     </>

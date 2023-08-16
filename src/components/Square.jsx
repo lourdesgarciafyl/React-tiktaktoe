@@ -1,8 +1,8 @@
 const Square = ({ children, updateBoard, index, isSelected}) => {
-    const className = `square ${isSelected ? `is-selected` : ``}`
+     const className = `square ${isSelected ? `is-selected` : ``}`
   
-    const handleClick = () => {
-      updateBoard(index);
+     const handleClick = () => {
+       updateBoard(index);
     }
   
     return ( 
